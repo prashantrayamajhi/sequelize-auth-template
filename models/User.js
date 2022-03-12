@@ -13,11 +13,6 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    gender: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      values: ["male", "female"],
-    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,

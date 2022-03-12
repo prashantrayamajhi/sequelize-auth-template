@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const sendMail = require("./../utils/nodemailer");
 
 exports.signup = async (req, res) => {
-  const { name, email, password, gender } = req.body;
+  const { name, email, password } = req.body;
   try {
     const userExists = await User.findOne({ where: { email } });
     if (userExists)
@@ -13,7 +13,6 @@ exports.signup = async (req, res) => {
     const user = await User.create({
       name,
       email,
-      gender,
       password,
     });
 
@@ -49,7 +48,6 @@ exports.login = async (req, res) => {
       id: user.id,
       name: user.name,
       email: user.email,
-      gender: user.gender,
       address: user.address,
     };
     return res.status(200).json({ data });
