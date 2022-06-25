@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("./../db/db");
 
-const Tag = sequelize.define("tag", {
+const Docs = sequelize.define("docs", {
   // define an id column
   id: {
     type: DataTypes.INTEGER,
@@ -10,10 +10,17 @@ const Tag = sequelize.define("tag", {
     primaryKey: true,
     autoIncrement: true,
   },
-  // define tag_name column
-  tag_name: {
+  // define name column
+  name: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  subject: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: "subject",
+    },
   },
 });
 
-module.exports = Tag;
+module.exports = Docs;

@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("./../db/db");
 
-const Category = sequelize.define("category", {
+const Subject = sequelize.define("subject", {
   // define an id column
   id: {
     type: DataTypes.INTEGER,
@@ -10,11 +10,18 @@ const Category = sequelize.define("category", {
     primaryKey: true,
     autoIncrement: true,
   },
-  // define category_name column
-  category_name: {
+  // define name column
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  class: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "class",
+    },
+  },
 });
 
-module.exports = Category;
+module.exports = Subject;

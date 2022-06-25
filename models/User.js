@@ -3,7 +3,7 @@ const sequelize = require("./../db/db");
 const bcrypt = require("bcryptjs");
 
 const User = sequelize.define(
-  "users",
+  "user",
   {
     name: {
       type: DataTypes.STRING,
@@ -13,14 +13,19 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isActivated: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
+    school: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "school",
+      },
     },
   },
   {
