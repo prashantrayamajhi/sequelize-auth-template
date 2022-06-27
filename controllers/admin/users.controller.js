@@ -1,4 +1,4 @@
-const User = require("./../../models/User");
+const { User } = require("./../../models/index");
 
 exports.createStudent = async (req, res) => {
   const { name, username, email, school, password } = req.body;

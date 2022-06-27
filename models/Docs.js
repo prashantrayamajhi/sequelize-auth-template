@@ -21,6 +21,14 @@ const Docs = sequelize.define("docs", {
       model: "subject",
     },
   },
+  file: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  publicId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 module.exports = Docs;

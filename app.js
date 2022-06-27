@@ -16,6 +16,7 @@ const AuthRoute = require("./routes/auth.route");
 const AdminUserRoute = require("./routes/admin/users.route");
 const AdminSchoolRoute = require("./routes/admin/school.route");
 const AdminSubjectRoute = require("./routes/admin/subject.route");
+const AdminClassRoute = require("./routes/admin/class.route");
 
 // users route middlewares
 app.use("/api/v1/auth", AuthRoute);
@@ -24,6 +25,7 @@ app.use("/api/v1/auth", AuthRoute);
 app.use("/api/v1/admin/users", AdminUserRoute);
 app.use("/api/v1/admin/schools", AdminSchoolRoute);
 app.use("/api/v1/admin/subject", AdminSubjectRoute);
+app.use("/api/v1/admin/classes", AdminClassRoute);
 
 sequelize
   .sync({ force: false })

@@ -1,38 +1,37 @@
 // import models
-const Product = require("./Product");
-const Category = require("./Category");
-const Tag = require("./Tag");
-const ProductTag = require("./ProductTag");
+const Class = require("./Class");
+const Docs = require("./Docs");
+const School = require("./School");
+const Subject = require("./Subject");
+const User = require("./User");
+const Video = require("./Videos");
 
-// Products belongsTo Category
-
-Product.belongsTo(Category, {
-  foreignKey: "category_id",
+User.hasOne(School, {
+  foreignKey: "school",
+  as: "schoolId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 
-// Categories have many Products
-
-Category.hasMany(Product, {
-  foreignKey: "category_id",
+Video.belongsTo(Class, {
+  foreignKey: "class",
+  as: "classId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 
-// Products belongToMany Tags (through ProductTag)
-
-Product.belongsToMany(Tag, {
-  through: ProductTag,
-  foreignKey: "product_id",
-});
-
-// Tags belongToMany Products (through ProductTag)
-
-Tag.belongsToMany(Product, {
-  through: ProductTag,
-  foreignKey: "tag_id",
+Docs.belongsTo(Class, {
+  foreignKey: "class",
+  as: "classId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 
 module.exports = {
-  Product,
-  Category,
-  Tag,
-  ProductTag,
+  Class,
+  Docs,
+  School,
+  Subject,
+  User,
+  Video,
 };

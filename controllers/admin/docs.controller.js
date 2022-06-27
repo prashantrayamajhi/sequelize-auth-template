@@ -1,9 +1,9 @@
-const { School } = require("./../../models/index");
-const { capitalize } = require("./../../helper/text");
+const { Docs } = require("./../../models/index");
+const { capitalize } = require("./../helpers/text");
 
-exports.getSchools = async (req, res) => {
+exports.getDocs = async (req, res) => {
   try {
-    const data = await School.findAll();
+    const data = await Docs.findAll();
     return res.status(200).json({ data });
   } catch (err) {
     console.log(err);
@@ -11,11 +11,11 @@ exports.getSchools = async (req, res) => {
   }
 };
 
-exports.getSchoolById = async (req, res) => {
+exports.getDocsById = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await School.findByPk(id);
-    if (!data) return res.status(404).send({ err: "School not found" });
+    const data = await Docs.findByPk(id);
+    if (!data) return res.status(404).send({ err: "Document not found" });
     return res.status(200).json({ data });
   } catch (err) {
     console.log(err);
@@ -23,19 +23,20 @@ exports.getSchoolById = async (req, res) => {
   }
 };
 
-exports.postSchool = async (req, res) => {
+exports.postDocs = async (req, res) => {
   try {
-    let { name } = req.body;
+    let { name, subject } = req.body;
     name = capitalize(name);
     if (!name.trim()) {
       return res.status(401).send({ err: "School name is required" });
     }
-    const school = await School.findOne({ name });
-    if (school) {
-      return res.status(409).send({ err: "School already exists" });
+    if (!subject) return res.status(200).send({ err: "Subject is required" });
+    const docExists = await Docs.findOne({ name });
+    if (docExists) {
+      return res.status(409).send({ err: "Documents already exists" });
     } else {
-      const category = await School.create({ name });
-      const data = await category.save();
+      const docs = await Docs.create({ name });
+      const data = await docs.save();
       return res.status(201).json({ data });
     }
   } catch (err) {
@@ -62,15 +63,15 @@ exports.postSchool = async (req, res) => {
 //   }
 // };
 
-exports.deleteSchoolById = async (req, res) => {
+exports.deleteDocsById = async (req, res) => {
   const { id } = req.params;
   try {
-    const school = await School.findByPk(id);
-    if (!school) {
-      return res.status(404).send({ err: "School not found" });
+    const docs = await Docs.findByPk(id);
+    if (!docs) {
+      return res.status(404).send({ err: "Document not found" });
     } else {
-      await school.destroy();
-      return res.status(200).send({ data: "School deleted successfully" });
+      await docs.destroy();
+      return res.status(200).send({ data: "Document deleted successfully" });
     }
   } catch (err) {
     console.log(err);
